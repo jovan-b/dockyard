@@ -1,13 +1,18 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+    <router-link to="/"><h1> {{title}} </h1></router-link>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'app'
+  name: 'app',
+  data() {
+    return {
+      title: 'Docky McDockFace Dockyards'
+    }
+  }
 }
 </script>
 

@@ -1,9 +1,10 @@
 <template>
   <div class="boats">
-    <h1> {{title}} </h1>
     <div v-for="boat in boats" class="single-boat">
+      <router-link :to="{name: 'boat', params: {id: boat.id}}">
       <h2>{{boat.name}}</h2>
       <img :src="boat.photo" :alt="boat.name">
+      </router-link>
     </div>
   </div>
 </template>
@@ -15,7 +16,6 @@
     name: 'boats',
     data() {
       return {
-        title: 'Docky McDockFace Dockyards',
         boats: []
       }
     },
