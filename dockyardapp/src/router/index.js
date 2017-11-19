@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import VueResource from 'vue-resource'
 import showBoats from '@/components/showBoats'
 import boat from '@/components/boat'
+import updateBoat from '@/components/updateBoat'
 import admin from '@/components/admin'
 
 Vue.use(VueResource);
@@ -19,6 +20,11 @@ export default new Router({
       path: '/boat/:id',
       name: 'boat',
       component: boat
+    },
+    {
+      path: '/updateBoat/:id',
+      name: 'updateBoat',
+      component: updateBoat
     },
     {
       path: '/admin',

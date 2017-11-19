@@ -26,6 +26,20 @@ Vue.mixin({
       }, error => {
         console.log(error);
       });
+    },
+    getBoat: function(id){
+      this.$http.get('http://localhost:3000/boats', {params: {id: id}}).then(response => {
+        this.boat = response.body[0];
+      }, error => {
+        console.log(error);
+      });
+    },
+    getBoatWorkers: function(id){
+      this.$http.get('http://localhost:3000/workers', {params: {boatIds_like: id}}).then(response => {
+        this.workers = response.body;
+      }, error => {
+        console.log(error);
+      });
     }
   }
 })

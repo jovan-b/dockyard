@@ -16,6 +16,7 @@
         {{w.name}}
       </li>
     </ul>
+    <router-link :to="{name: 'updateBoat', params: {id: this.$route.params.id}}" tag="button" class="btn btn-primary">Update</router-link>
   </div>
 </template>
 
@@ -33,17 +34,9 @@
     created() {
       let id = parseInt(this.$route.params.id);
 
-      this.$http.get('http://localhost:3000/boats', {params: {id: id}}).then(response => {
-        this.boat = response.body[0];
-      }, error => {
-        console.log(error);
-      });
+      this.getBoat(id);
 
-      this.$http.get('http://localhost:3000/workers', {params: {boatIds_like: id}}).then(response => {
-        this.workers = response.body;
-      }, error => {
-        console.log(error);
-      });
+      this.getBoatWorkers(id);
     }
   }
 </script>
