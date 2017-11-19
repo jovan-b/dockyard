@@ -1,16 +1,20 @@
 <template>
   <div class="single-boat">
-    <h2>{{boat.name}}</h2>
-    <img :src="boat.photo" :alt="boat.name">
-    <p> Type: {{boat.type}} </p>
-    <p> Length: {{boat.length}} </p>
-    <p> Work Description: {{boat.work_description}}</p>
-    <p> Arrival Date: {{boat.arrival_date}}</p>
-    <p> Delivery Date: {{boat.delivery_date}}</p>
-    <p> Status: {{boat.status}}</p>
-    <p> Workers: </p>
+    <div class="boat-photo">
+      <h1>{{boat.name}}</h1>
+      <img :src="boat.photo" :alt="boat.name">
+    </div>
+    <h4> Type: </h4> {{boat.type}}
+    <h4> Length: </h4> {{boat.length}}
+    <h4> Work Description: </h4> {{boat.work_description}}
+    <h4> Arrival Date: </h4> {{boat.arrival_date}}
+    <h4> Delivery Date: </h4> {{boat.delivery_date}}
+    <h4> Status: </h4> {{boat.status}}
+    <h4> Workers: </h4>
     <ul>
-      <li v-for="w in workers">{{w.name}}</li>
+      <li v-for="w in workers">
+        {{w.name}}
+      </li>
     </ul>
   </div>
 </template>
@@ -47,22 +51,23 @@
 
 
 <style scoped>
-h1, h2 {
+h1, h4{
   font-weight: normal;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
 }
 
 a {
   color: #42b983;
 }
 
-.single-boat{
+.boat-photo {
+  text-align: center;
+}
+
+.single-boat {
+  text-align: left;
+  max-width: 800px;
+  margin: 0 auto;
   padding: 20px;
-  margin: 20px 0;
   box-sizing: border-box;
   background: #eee;
 }

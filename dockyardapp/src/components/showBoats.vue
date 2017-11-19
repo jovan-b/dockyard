@@ -50,15 +50,17 @@ a {
   color: #42b983;
 }
 
-#boats{
+.boats {
   max-width: 800px;
   margin: 0 auto;
 }
 
-.single-boat{
+.single-boat {
+  margin: 0 auto;
   padding: 20px;
   margin: 20px 0;
   box-sizing: border-box;
   background: #eee;
 }
+
 </style>

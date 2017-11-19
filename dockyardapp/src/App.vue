@@ -1,6 +1,20 @@
 <template>
   <div id="app">
-    <router-link to="/"><h1> {{title}} </h1></router-link>
+    <b-navbar toggleable="md" type="dark" variant="info">
+      <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
+
+      <router-link to="/">
+        <b-navbar-brand>{{title}}</b-navbar-brand>
+      </router-link>
+
+      <b-collapse is-nav id="nav_collapse">
+
+        <b-navbar-nav>
+          <b-nav-item><router-link to="/admin">Admin Panel</router-link></b-nav-item>
+        </b-navbar-nav>
+
+      </b-collapse>
+    </b-navbar>
     <router-view></router-view>
   </div>
 </template>
@@ -23,6 +37,11 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+
 }
+
+li a {
+  color:inherit;
+}
+
 </style>
