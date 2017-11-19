@@ -55,10 +55,6 @@ h1, h4{
   font-weight: normal;
 }
 
-a {
-  color: #42b983;
-}
-
 .boat-photo {
   text-align: center;
 }

@@ -33,7 +33,7 @@
         <div v-if="deleted">
           <b-alert variant="success" show>Boat Deleted</b-alert>
         </div>
-        <div id="delup-boats">
+        <div id="del-boats">
           <table class="table table-striped table-hover">
             <thead>
               <tr>
@@ -45,7 +45,7 @@
             </thead>
             <tbody>
               <tr v-for="b in boats">
-                <td>{{b.name}}</td>
+                <td><router-link :to="{name: 'boat', params: {id: b.id}}">{{b.name}}</router-link></td>
                 <td>{{b.arrival_date}}</td>
                 <td>{{b.delivery_date}}</td>
                 <td>
@@ -55,6 +55,16 @@
             </tbody>
           </table>
         </div>
+      </b-tab>
+      <b-tab title="Manage Workers">
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Boat Number</th>
+            </tr>
+          </thead>
+        </table>
       </b-tab>
     </b-tabs>
   </div>
@@ -78,7 +88,7 @@
           status: ""
         },
         boats: [],
-        fields: ['name', 'arrival_date', 'delivery_date', 'Actions'],
+        workers: [],
         submitted: false,
         deleted: false
       }
@@ -107,17 +117,11 @@
         }, error => {
           console.log(error);
         });
-      },
-      getBoats: function(){
-        this.$http.get('http://localhost:3000/boats').then(response => {
-          this.boats = response.body;
-        }, error => {
-          console.log(error);
-        });
       }
     },
     created() {
       this.getBoats();
+      this.getWorkers();
     }
   }
 </script>
@@ -125,20 +129,6 @@
 
 
 <style scoped>
-h1, h2 {
-  font-weight: normal;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-a {
-  color: #42b983;
-}
-
-
 
 .admin {
   max-width: 800px;
@@ -148,4 +138,5 @@ a {
   background: #eee;
   text-align: left;
 }
+
 </style>

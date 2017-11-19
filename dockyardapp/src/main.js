@@ -11,6 +11,25 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 Vue.config.productionTip = false
 
+Vue.mixin({
+  methods: {
+    getBoats: function(){
+      this.$http.get('http://localhost:3000/boats').then(response => {
+        this.boats = response.body;
+      }, error => {
+        console.log(error);
+      });
+    },
+    getWorkers: function(){
+      this.$http.get('http://localhost:3000/workers').then(response => {
+        this.workers = response.body;
+      }, error => {
+        console.log(error);
+      });
+    }
+  }
+})
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

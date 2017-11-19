@@ -2,8 +2,11 @@
   <div class="boats">
     <div v-for="boat in boats" class="single-boat">
       <router-link :to="{name: 'boat', params: {id: boat.id}}">
-      <h2>{{boat.name}}</h2>
-      <b-img thumbnail fluid :src="boat.photo" :alt="boat.name" />
+      <b-card :title="boat.name" :img-src="boat.photo" :img-alt="boat.name" img-top style="max-width: 25rem;" class="mb-2">
+        <p class="card-text">
+          {{boat.work_description}}
+        </p>
+      </b-card>
       </router-link>
     </div>
   </div>
@@ -20,11 +23,7 @@
       }
     },
     created() {
-      this.$http.get('http://localhost:3000/boats').then(response => {
-        this.boats = response.body;
-      }, error => {
-        console.log(error);
-      });
+      this.getBoats();
     }
   }
 </script>
@@ -32,26 +31,13 @@
 
 
 <style scoped>
-h1, h2 {
-  font-weight: normal;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
 
 a {
-  color: #42b983;
+  color: inherit;
 }
 
 .boats {
-  max-width: 800px;
+  max-width: 400px;
   margin: 0 auto;
 }
 
