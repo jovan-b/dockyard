@@ -3,7 +3,7 @@
     <div v-for="boat in boats" class="single-boat">
       <router-link :to="{name: 'boat', params: {id: boat.id}}">
       <h2>{{boat.name}}</h2>
-      <img :src="boat.photo" :alt="boat.name">
+      <b-img thumbnail fluid :src="boat.photo" :alt="boat.name" />
       </router-link>
     </div>
   </div>

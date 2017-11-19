@@ -2,7 +2,7 @@
   <div class="single-boat">
     <div class="boat-photo">
       <h1>{{boat.name}}</h1>
-      <img :src="boat.photo" :alt="boat.name">
+      <img fluid :src="boat.photo" :alt="boat.name">
     </div>
     <h4> Type: </h4> {{boat.type}}
     <h4> Length: </h4> {{boat.length}}
