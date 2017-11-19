@@ -35,15 +35,8 @@
         console.log(error);
       });
 
-      this.$http.get('http://localhost:3000/workers').then(response => {
-        let worker_array = response.body;
-        let workers_on_boat = [];
-        worker_array.forEach(function(w){
-          if(w.boatIds.includes(id)){
-            workers_on_boat.push(w);
-          }
-        });
-        this.workers = workers_on_boat;
+      this.$http.get('http://localhost:3000/workers', {params: {boatIds_like: id}}).then(response => {
+        this.workers = response.body;
       }, error => {
         console.log(error);
       });
