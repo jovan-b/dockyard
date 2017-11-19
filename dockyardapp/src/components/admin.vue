@@ -33,7 +33,13 @@
         <div v-if="deleted">
           <b-alert variant="success" show>Boat Deleted</b-alert>
         </div>
-        <div id="del-boats">
+        <div v-if="assigned">
+          <b-alert variant="success" show>Worker Assigned</b-alert>
+        </div>
+        <div v-if="unassigned">
+          <b-alert variant="success" show>Worker Unassigned</b-alert>
+        </div>
+        <div id="edit-boats">
           <table class="table table-striped table-hover">
             <thead>
               <tr>
@@ -49,22 +55,22 @@
                 <td>{{b.arrival_date}}</td>
                 <td>{{b.delivery_date}}</td>
                 <td>
+                  <b-dropdown id="ddown1" text="Assign" class="m-md-2">
+                    <div v-for="w in workers">
+                      <b-dropdown-item v-if="!w.boatIds.includes(b.id)" v-on:click.prevent="assign(b.id, w.id, w.boatIds)">{{w.name}}</b-dropdown-item>
+                    </div>
+                  </b-dropdown>
+                  <b-dropdown id="ddown1" text="Unassign" class="m-md-2">
+                    <div v-for="w in workers">
+                      <b-dropdown-item v-if="w.boatIds.includes(b.id)" v-on:click.prevent="unassign(b.id, w.id, w.boatIds)">{{w.name}}</b-dropdown-item>
+                    </div>
+                  </b-dropdown>
                   <button v-on:click.prevent="deleteBoat(b.id)"  class="btn btn-danger">Delete</button>
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
-      </b-tab>
-      <b-tab title="Manage Workers">
-        <table class="table table-striped table-hover">
-          <thead>
-            <tr>
-              <th scope="col">Name</th>
-              <th scope="col">Boat Number</th>
-            </tr>
-          </thead>
-        </table>
       </b-tab>
     </b-tabs>
   </div>
@@ -90,7 +96,9 @@
         boats: [],
         workers: [],
         submitted: false,
-        deleted: false
+        deleted: false,
+        assigned: false,
+        unassigned: false
       }
     },
     methods: {
@@ -111,11 +119,41 @@
       },
       deleteBoat: function(id){
         let path = "http://localhost:3000/boats/" + id;
+
         this.$http.delete(path).then(response => {
           this.deleted = true;
+
+          for(var i = 0; i < this.workers.length; i++){
+            if(this.workers[i].boatIds.includes(id)){
+              this.unassign(id, this.workers[i].id, this.workers[i].boatIds);
+            }
+          }
+
+          this.getWorkers();
           this.getBoats();
         }, error => {
           console.log(error);
+        });
+      },
+      assign: function(bid, wid, boatIds){
+        boatIds.push(bid)
+        let path = 'http://localhost:3000/workers/' + wid;
+        this.$http.patch(path, {
+          boatIds: boatIds
+        }).then(response => {
+          this.assigned = true;
+          this.getWorkers();
+        });
+      },
+      unassign: function(bid, wid, boatIds){
+        let index = boatIds.indexOf(bid)
+        boatIds.splice(index, 1);
+        let path = 'http://localhost:3000/workers/' + wid;
+        this.$http.patch(path, {
+          boatIds: boatIds
+        }).then(response => {
+          this.unassigned = true;
+          this.getWorkers();
         });
       }
     },
@@ -131,7 +169,7 @@
 <style scoped>
 
 .admin {
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
   padding: 20px;
   box-sizing: border-box;

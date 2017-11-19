@@ -61,7 +61,7 @@ h1, h4{
 
 .single-boat {
   text-align: left;
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
   padding: 20px;
   box-sizing: border-box;
