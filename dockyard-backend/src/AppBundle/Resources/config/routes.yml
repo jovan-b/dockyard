@@ -1,0 +1,5 @@
+boats_backend_type:
+    resource: "src\AppBundle\Controller"
+    type: rest
+    name_prefix: api_boats_
+    prefix: /boats

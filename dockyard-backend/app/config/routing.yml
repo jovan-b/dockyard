@@ -1,3 +1,8 @@
 app:
     resource: '@AppBundle/Controller/'
     type: annotation
+
+boats_backend:
+    resource: "@AppBundle/Resources/config/routes.yml"
+    type: rest
+    prefix: /api
