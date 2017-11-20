@@ -20,7 +20,7 @@ json-server --watch db.json
 
 ### Installation
 
-Download the git repo, navigate to the dockyard app folder and run the follow commands to start the server:
+Download the git repo, navigate to the dockyardapp folder and run the follow commands to start the server:
 
 ```
 npm install
@@ -36,4 +36,28 @@ npm run dev
 
 Navigate to http://localhost:8080/ in your browser to use the web application.
 
-## Backend REST API installation coming soon..
+## Backend REST API installation
+
+Backend REST API uses Symfony as the framework and Doctorine as an ORM.
+
+Import dockyard.sql into a MySQL database and start the server. Change the variables in the dockyard-backend\app\config\parameters.yml file to match your server.
+
+Navigate to the dockyard-backend folder in the command prompt and install the dependencies by running:
+
+```
+composer update
+```
+
+Then generate the database tables by running:
+
+```
+php app/console doctrine:schema:update --force
+```
+
+To start the server, run:
+
+```
+php app/console server:run
+```
+
+The server should start on 127.0.0.1:8000/
