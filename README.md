@@ -51,13 +51,13 @@ composer update
 Then generate the database tables by running:
 
 ```
-php app/console doctrine:schema:update --force
+php bin/console doctrine:schema:update --force
 ```
 
 To start the server, run:
 
 ```
-php app/console server:run
+php bin/console server:run
 ```
 
 The server should start on 127.0.0.1:8000/
