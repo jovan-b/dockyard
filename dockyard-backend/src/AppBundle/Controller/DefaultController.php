@@ -21,7 +21,7 @@ class DefaultController extends Controller
     }
 	
 	/**
-	 * @Route("/api/boats/", name="all_boat")
+	 * @Route("/api/boats/", name="GET boats")
 	 */
 	public function getBoats(){
 		$boatRepository = $this->getDoctrine()->getRepository('AppBundle:boat');
@@ -32,14 +32,15 @@ class DefaultController extends Controller
 			$boats = NULL;
 		}
 		
-		if(!$boat) {
-			throw new NotFoundHttpException(sprintf('The boat \'%s\' was not found.', $id));
+		if(!$boats) {
+			throw new NotFoundHttpException(printf('Boats not found'));
 		}
-		return $boats;
+		
+		return new Response(json_encode($boats));
 	}
 	
 	/**
-	 * @Route("/api/boats/{id}", name="boat")
+	 * @Route("/api/boats/{id}", name="GET boats/{id}")
 	 */
 	public function getBoat($id){
 		$boatRepository = $this->getDoctrine()->getRepository('AppBundle:boat');
@@ -53,7 +54,21 @@ class DefaultController extends Controller
 		if(!$boat) {
 			throw new NotFoundHttpException(sprintf('The boat \'%s\' was not found.', $id));
 		}
+		
+		$workerRepository = $this->getDoctrine()->getRepository('AppBundle:boat_worker');
+		$workers = NULL;
+		
+		try{
+			$workers = $workerRepository ->findBy(array('boatId' => $id));
+		} catch (\Exception $exception){
+			$workers = NULL;
+		}
 
-        return new Response(json_encode($boat));
+		$boatworkers[] = $boat;
+		
+		foreach($workers as $w)
+			$boatworkers[] = $w;
+		
+        return new Response(json_encode($boatworkers));
 	}
 }

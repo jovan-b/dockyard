@@ -98,7 +98,6 @@ class boat_worker implements JsonSerializable
 	public function jsonSerialize()
     {
         return array(
-			'id' => $this->id,
             'boat_id' => $this->boatId,
             'worker_id' => $this->workerId
         );
