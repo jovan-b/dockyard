@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JsonSerializable;
 
 /**
  * worker
@@ -10,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="worker")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\workerRepository")
  */
-class worker
+class worker implements JsonSerializable
 {
     /**
      * @var int
@@ -123,6 +124,16 @@ class worker
     public function getPhoto()
     {
         return $this->photo;
+    }
+	
+	public function jsonSerialize()
+    {
+        return array(
+			'id' => $this->id,
+            'name' => $this->name,
+            'phone' => $this->phone,
+			'photo' => $this->photo
+        );
     }
 }
 

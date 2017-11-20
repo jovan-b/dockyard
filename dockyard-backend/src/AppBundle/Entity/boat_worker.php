@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JsonSerializable;
 
 /**
  * boat_worker
@@ -10,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="boat_worker")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\boat_workerRepository")
  */
-class boat_worker
+class boat_worker implements JsonSerializable
 {
     /**
      * @var int
@@ -92,6 +93,15 @@ class boat_worker
     public function getWorkerId()
     {
         return $this->workerId;
+    }
+	
+	public function jsonSerialize()
+    {
+        return array(
+			'id' => $this->id,
+            'boat_id' => $this->boatId,
+            'worker_id' => $this->workerId
+        );
     }
 }
 
